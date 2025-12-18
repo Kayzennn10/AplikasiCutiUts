@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="#2196F3"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Halo, Karyawan!"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Silakan ajukan cuti Anda di sini"
+        android:textColor="#E3F2FD"
+        android:textSize="14sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="24dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="120dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#FF9800">
+
+        <TextView
+            android:id="@+id/tvInfoLibur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Memuat info libur..."
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:drawableStart="@android:drawable/ic_menu_my_calendar"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardInfo"
+        android:layout_margin="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Form Pengajuan"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etNama"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_rounded_input"
+                android:hint="Nama Lengkap"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="12dp"
+                android:inputType="textPersonName"/>
+
+            <EditText
+                android:id="@+id/etLamaCuti"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_rounded_input"
+                android:hint="Lama Cuti (Hari)"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="12dp"
+                android:inputType="number"/>
+
+            <EditText
+                android:id="@+id/etAlasan"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_rounded_input"
+                android:hint="Alasan Cuti"
+                android:gravity="top|start"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:inputType="textMultiLine"/>
+
+            <Button
+                android:id="@+id/btnKirim"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Kirim Pengajuan"
+                android:textStyle="bold"
+                android:backgroundTint="#2196F3"
+                app:cornerRadius="12dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnMasukAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Masuk Portal Admin"
+        android:textColor="#2196F3"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"/>
+
+</RelativeLayout>

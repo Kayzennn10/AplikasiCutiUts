@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "922938040274",
+    "firebase_url": "https://utsmobilecuti-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "utsmobilecuti",
+    "storage_bucket": "utsmobilecuti.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922938040274:android:01a0a86c5f163e59c0f20b",
+        "android_client_info": {
+          "package_name": "com.example.aplikasicuti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4D22_9irCX2rhVBeD1jWoRscQziaDERc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
