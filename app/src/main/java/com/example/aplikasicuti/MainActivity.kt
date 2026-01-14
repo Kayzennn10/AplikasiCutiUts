@@ -1,9 +1,11 @@
 package com.example.aplikasicuti
 
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView // Tambahan import untuk ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,9 @@ import retrofit2.http.GET
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Panggil fungsi Splash Screen PALING PERTAMA
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -27,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         val etAlasan = findViewById<EditText>(R.id.etAlasan)
         val btnKirim = findViewById<Button>(R.id.btnKirim)
         val btnMasukAdmin = findViewById<Button>(R.id.btnMasukAdmin)
-        val tvInfoLibur = findViewById<TextView>(R.id.tvInfoLibur) // Ini textview baru
+        val tvInfoLibur = findViewById<TextView>(R.id.tvInfoLibur)
+
+        // TAMBAHAN: Inisialisasi Tombol Info (About)
+        val btnInfo = findViewById<ImageView>(R.id.btnInfo)
 
         val database = FirebaseDatabase.getInstance().getReference("pengajuan_cuti")
 
@@ -65,24 +73,29 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)
         }
+
+        // --- BAGIAN 5: TOMBOL INFO / ABOUT (Syarat UAS No. 2) ---
+        btnInfo.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Fungsi khusus buat ambil API
     private fun ambilInfoLibur(textView: TextView) {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://date.nager.at/") // URL Website API
+            .baseUrl("https://date.nager.at/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val apiService = retrofit.create(HolidayApi::class.java)
 
-        // Ambil data libur Indonesia (ID) selanjutnya
         apiService.getNextHoliday("ID").enqueue(object : Callback<List<HolidayData>> {
             override fun onResponse(call: Call<List<HolidayData>>, response: Response<List<HolidayData>>) {
                 if (response.isSuccessful) {
                     val liburList = response.body()
                     if (liburList != null && liburList.isNotEmpty()) {
-                        val liburBerikutnya = liburList[0] // Ambil yang paling dekat
+                        val liburBerikutnya = liburList[0]
                         textView.text = "📅 Libur Berikutnya: ${liburBerikutnya.localName} (${liburBerikutnya.date})"
                     } else {
                         textView.text = "Tidak ada info libur dekat."
@@ -98,8 +111,6 @@ class MainActivity : AppCompatActivity() {
 }
 
 // --- CLASS MODEL DATA ---
-
-// 1. Model buat Firebase
 data class CutiData(
     val id: String? = null,
     val nama: String? = null,
@@ -108,16 +119,13 @@ data class CutiData(
     val status: String? = null
 )
 
-// 2. Model buat API Libur (Sesuaikan dengan JSON dari internet)
 data class HolidayData(
     val date: String,
     val localName: String,
     val name: String
 )
 
-// 3. Interface buat Request API
 interface HolidayApi {
-    // PERBAIKAN: Ganti "ID" jadi "{countryCode}" supaya nyambung sama bawahnya
     @GET("api/v3/NextPublicHolidays/{countryCode}")
     fun getNextHoliday(@retrofit2.http.Path("countryCode") countryCode: String = "ID"): Call<List<HolidayData>>
 }
